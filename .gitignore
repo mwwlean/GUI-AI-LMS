@@ -1,0 +1,22 @@
+/app/nbproject/private/
+/app/build/
+/app/dist/
+
+/nbproject/private/
+
+# Compiled class files
+*.class
+
+# IDE-specific files
+/.settings/
+/.classpath
+/.project
+
+# Backup / temp files
+*.log
+*.tmp
+*.bak
+.DS_Store
+
+# Other generated files
+/target/
