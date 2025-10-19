@@ -1,22 +1,48 @@
-/app/nbproject/private/
-/app/build/
-/app/dist/
-
-/nbproject/private/
-
 # Compiled class files
 *.class
 
-# IDE-specific files
-/.settings/
-/.classpath
-/.project
-
-# Backup / temp files
+# Log files
 *.log
-*.tmp
-*.bak
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Maven target folder
+/target/
+
+# NetBeans project files
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+*.nbattrs
+
+# Eclipse project files
+.project
+.classpath
+.settings/
+
+# IntelliJ IDEA
+*.iml
+.idea/
+*.ipr
+*.iws
+
+# VS Code
+.vscode/
+
+# MacOS
 .DS_Store
 
-# Other generated files
-/target/
+# Windows
+Thumbs.db
+ehthumbs.db

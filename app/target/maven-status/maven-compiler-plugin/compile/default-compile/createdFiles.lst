@@ -1,0 +1,6 @@
+com\mycompany\app\model\User.class
+com\mycompany\app\util\MessageUtil.class
+com\mycompany\app\controller\UserController.class
+com\mycompany\app\controller\UserController$GreetListener.class
+com\mycompany\app\config\AppConfig.class
+com\mycompany\app\view\UserView.class
