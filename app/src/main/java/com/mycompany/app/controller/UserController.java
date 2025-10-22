@@ -1,34 +1,32 @@
 package com.mycompany.app.controller;
 
 import com.mycompany.app.model.User;
-import com.mycompany.app.view.UserView;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-/**
- * This is the Controller part of MVC.
- * It connects the View and the Model.
- * It tells the Model what to do when the user interacts with the GUI.
- */
 public class UserController {
-    private User model;
-    private UserView view;
+    private User userModel;
+    private AIAssistant ai;
 
-    public UserController(User model, UserView view) {
-        this.model = model;
-        this.view = view;
-
-        // Add listener to the button in the view
-        this.view.addGreetListener(new GreetListener());
+    public UserController(User userModel) {
+        this.userModel = userModel;
+        this.ai = new AIAssistant(userModel);
     }
 
-    // Inner class to handle button click
-    class GreetListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            model.setName(view.getUserName()); // Update the model with user input
-            view.setMessage("Hello, " + model.getName() + "!"); // Show message on GUI
+    public String[][] getBooksData() {
+        var books = userModel.getAvailableBooks();
+        String[][] data = new String[books.size()][3];
+        for (int i = 0; i < books.size(); i++) {
+            data[i] = books.get(i);
         }
+        return data;
+    }
+
+    public boolean isBookAvailable(String title) {
+        return userModel.checkBookAvailability(title);
+    }
+
+    // ✅ Delegate AI reply generation
+    public String getAIResponse(String message) {
+        return ai.respond(message);
     }
 }
+

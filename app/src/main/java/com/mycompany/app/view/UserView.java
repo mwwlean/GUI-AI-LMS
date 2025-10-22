@@ -1,44 +1,96 @@
 package com.mycompany.app.view;
 
+import com.mycompany.app.controller.UserController;
 import javax.swing.*;
-import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
 /**
- * This is the View part of MVC.
- * It shows the user interface (GUI) and buttons.
+ * Student Front Desk GUI (MVC View)
+ * Integrates with LibraryDesign.java for UI appearance.
+ * - Displays list of available books from MySQL
+ * - Borrow and Return buttons (auto-type command)
+ * - Chat panel with AI assistant responses
  */
 public class UserView extends JFrame {
-    private JTextField nameField = new JTextField(20);
-    private JButton greetButton = new JButton("Greet");
-    private JLabel messageLabel = new JLabel("Enter your name and click Greet");
 
-    public UserView() {
-        // Set title and default close operation
-        this.setTitle("Simple MVC Example");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    private JTable booksTable;
+    private JTextField chatInput;
+    private JTextArea chatDisplay;
+    private UserController controller;
+    private LibraryDesign design;
 
-        // Layout
-        JPanel panel = new JPanel();
-        panel.add(nameField);
-        panel.add(greetButton);
-        panel.add(messageLabel);
+    public UserView(UserController controller) {
+        this.controller = controller;
 
-        this.setContentPane(panel);
-        this.pack(); // Adjusts size
-        this.setVisible(true); // Shows the window
+        // Window setup
+        setTitle("Student Front Desk - EVSU Library System");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(950, 600);
+        setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
+
+        // Use LibraryDesign for layout and styling
+        design = new LibraryDesign();
+        setContentPane(design);
+
+        // Link components from design
+        this.booksTable = design.getBooksTable();
+        this.chatInput = design.getChatInput();
+        this.chatDisplay = design.getChatDisplay();
+
+        // Attach button listeners
+        design.getBorrowButton().addActionListener(e -> setCommandInChat("Borrow "));
+        design.getReturnButton().addActionListener(e -> setCommandInChat("Return "));
+        design.getSendButton().addActionListener(e -> handleSendMessage());
+
+        // Load books from database
+        loadBooksFromDatabase();
     }
 
-    // Methods to interact with controller
-    public String getUserName() {
-        return nameField.getText();
+    /**
+     * Loads book data from the database using the controller.
+     */
+    private void loadBooksFromDatabase() {
+        try {
+            String[][] data = controller.getBooksData();
+            DefaultTableModel model = (DefaultTableModel) booksTable.getModel();
+            model.setRowCount(0); // clear old data
+
+            for (String[] row : data) {
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Error loading books from database: " + e.getMessage(),
+                "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
-    public void setMessage(String message) {
-        messageLabel.setText(message);
+    /**
+     * Auto-fill the chat input field with a command.
+     */
+    private void setCommandInChat(String command) {
+        chatInput.setText(command);
+        chatInput.requestFocus();
     }
 
-    // Connects button click with the controller
-    public void addGreetListener(ActionListener listener) {
-        greetButton.addActionListener(listener);
+    /**
+     * Handles message sending and AI response logic.
+     */
+    private void handleSendMessage() {
+        String text = chatInput.getText().trim();
+        if (text.isEmpty()) return;
+
+        // Append user message
+        chatDisplay.append("You: " + text + "\n");
+
+        // Get AI response from controller
+        String reply = controller.getAIResponse(text);
+
+        // Append AI reply
+        chatDisplay.append("AI: " + reply + "\n\n");
+
+        chatInput.setText("");
     }
 }

@@ -1,0 +1,7 @@
+Welcome to the Library Management System Help!
+
+1️⃣ To view available books — browse the list on the left side.
+2️⃣ To borrow a book — select a book and click 'Borrow'.
+3️⃣ To return a book — select a borrowed book and click 'Return'.
+4️⃣ To chat with the AI assistant — type your question in the chat box.
+5️⃣ You can click this Help button anytime to view these instructions again.

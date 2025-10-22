@@ -1,25 +1,52 @@
 package com.mycompany.app.model;
 
-/**
- * This is the Model part of MVC.
- * It stores the data of our application.
- * In this case, it only stores the user's name.
- */
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
-    private String name;
 
-    // Constructor
-    public User(String name) {
-        this.name = name;
+    // ✅ Fetch list of books (for the table)
+    public List<String[]> getAvailableBooks() {
+        List<String[]> books = new ArrayList<>();
+        String query = "SELECT id, title, author FROM books";
+
+        try (Connection conn = AppConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                books.add(new String[]{
+                        String.valueOf(rs.getInt("id")),
+                        rs.getString("title"),
+                        rs.getString("author")
+                });
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return books;
     }
 
-    // Getter - allows other classes to read the name
-    public String getName() {
-        return name;
-    }
+    // ✅ Check if a book is available
+    public boolean checkBookAvailability(String title) {
+        String query = "SELECT available FROM books WHERE title = ?";
 
-    // Setter - allows other classes to change the name
-    public void setName(String name) {
-        this.name = name;
+        try (Connection conn = AppConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, title);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getBoolean("available");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }
