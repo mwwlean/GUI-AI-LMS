@@ -1,4 +1,4 @@
-package com.mycompany.app.controller;
+package com.mycompany.app.controller.librarian;
 
 import java.awt.Color;
 import java.util.List;
@@ -7,9 +7,9 @@ import javax.swing.UIManager;
 
 import com.mycompany.app.model.Book;
 import com.mycompany.app.model.BookModel;
-import com.mycompany.app.view.BookManagementPanel;
-import com.mycompany.app.view.LibrarianDashboardView;
-import com.mycompany.app.view.PendingRequestsPanel;
+import com.mycompany.app.view.librarian.BookManagementPanel;
+import com.mycompany.app.view.librarian.LibrarianDashboardView;
+import com.mycompany.app.view.librarian.PendingRequestsPanel;
 
 public class LibrarianDashboardController {
 

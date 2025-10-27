@@ -1,4 +1,4 @@
-package com.mycompany.app.view;
+package com.mycompany.app.view.librarian;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

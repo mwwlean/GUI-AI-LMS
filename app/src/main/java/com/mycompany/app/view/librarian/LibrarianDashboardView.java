@@ -1,4 +1,4 @@
-package com.mycompany.app.view;
+package com.mycompany.app.view.librarian;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -50,7 +50,7 @@ public class LibrarianDashboardView extends JFrame {
         leftPanel.setBackground(Color.WHITE);
 
         JLabel logoLabel = new JLabel();
-        ImageIcon logoIcon = new ImageIcon("src/main/java/com/mycompany/app/view/evsu_logo.png");
+        ImageIcon logoIcon = new ImageIcon("/images/evsu_logo.png");
         Image scaled = logoIcon.getImage().getScaledInstance(55, 55, Image.SCALE_SMOOTH);
         logoLabel.setIcon(new ImageIcon(scaled));
 
