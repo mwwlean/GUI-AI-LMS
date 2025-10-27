@@ -1,5 +1,7 @@
 package com.mycompany.app.view.frontdesk;
 
+import com.mycompany.app.controller.frontdesk.FrontDeskController;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -21,8 +23,10 @@ public class LibraryDesign extends JPanel {
     private JLabel timeLabel, dateLabel, dayLabel;
     private JPanel aiCenterPanel;
     private JLabel aiIcon, aiText;
+    private final FrontDeskController controller;
 
-    public LibraryDesign() {
+    public LibraryDesign(FrontDeskController controller) {
+        this.controller = controller;
         setLayout(new BorderLayout(20, 20));
         setBackground(new Color(245, 245, 245));
 
@@ -102,9 +106,16 @@ private JPanel createLeftPanel() {
     booksCard.add(redHeader, BorderLayout.NORTH);
 
 // Table
-String[] columns = {"Book ID", "Title", "Author"};
-DefaultTableModel model = new DefaultTableModel(columns, 0);
+String[] columns = {"#", "Title", "Author"};
+DefaultTableModel model = new DefaultTableModel(columns, 0) {
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return false;
+    }
+};
 booksTable = new JTable(model);
+booksTable.setDefaultEditor(Object.class, null);
+booksTable.getTableHeader().setReorderingAllowed(false);
 booksTable.setRowHeight(30);
 booksTable.setFont(new Font("Poppins", Font.PLAIN, 13));
 
@@ -280,6 +291,8 @@ aiCenterPanel.add(aiIcon, gbc);
                 aiCenterPanel.setVisible(false);
                 chatDisplay.append("You: " + userMessage + "\n");
                 chatInput.setText("");
+                String reply = controller.getAIResponse(userMessage);
+                chatDisplay.append("AI: " + reply + "\n\n");
             }
         });
 

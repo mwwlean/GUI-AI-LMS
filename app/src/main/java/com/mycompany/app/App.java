@@ -11,7 +11,7 @@ import com.mycompany.app.view.librarian.LibrarianDashboardView;
 public class App {
 
     private static final boolean RUN_FRONT_DESK = true;
-    private static final boolean RUN_LIBRARIAN_DASHBOARD = true;
+    private static final boolean RUN_LIBRARIAN_DASHBOARD = false;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

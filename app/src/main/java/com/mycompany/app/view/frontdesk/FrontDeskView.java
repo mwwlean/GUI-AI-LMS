@@ -28,7 +28,7 @@ public class FrontDeskView extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        design = new LibraryDesign();
+        design = new LibraryDesign(controller);
         setContentPane(design);
 
         design.getBorrowButton().addActionListener(e -> setCommandInChat("Borrow "));
