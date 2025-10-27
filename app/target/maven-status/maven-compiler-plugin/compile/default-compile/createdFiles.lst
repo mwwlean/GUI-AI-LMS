@@ -22,3 +22,13 @@ com\mycompany\app\model\Request.class
 com\mycompany\app\view\BookManagementPanel.class
 com\mycompany\app\model\RequestDAO.class
 com\mycompany\app\view\LibrarianDashboardView$1.class
+com\mycompany\app\controller\AIAssistant.class
+com\mycompany\app\App.class
+com\mycompany\app\view\LibraryDesign$RoundedPanel.class
+com\mycompany\app\util\MessageUtil.class
+com\mycompany\app\view\FrontDeskView.class
+com\mycompany\app\controller\FrontDeskController.class
+com\mycompany\app\view\LibraryDesign.class
+com\mycompany\app\model\LibraryCatalog.class
+com\mycompany\app\view\LibraryDesign$1.class
+com\mycompany\app\view\LibraryDesign$RoundedButton.class
