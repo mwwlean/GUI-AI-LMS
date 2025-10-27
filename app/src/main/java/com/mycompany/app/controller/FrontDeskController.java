@@ -1,18 +1,18 @@
 package com.mycompany.app.controller;
 
-import com.mycompany.app.model.User;
+import com.mycompany.app.model.LibraryCatalog;
 
-public class UserController {
-    private User userModel;
+public class FrontDeskController {
+    private LibraryCatalog catalog;
     private AIAssistant ai;
 
-    public UserController(User userModel) {
-        this.userModel = userModel;
-        this.ai = new AIAssistant(userModel);
+    public FrontDeskController(LibraryCatalog catalog) {
+        this.catalog = catalog;
+        this.ai = new AIAssistant(catalog);
     }
 
     public String[][] getBooksData() {
-        var books = userModel.getAvailableBooks();
+        var books = catalog.getAvailableBooks();
         String[][] data = new String[books.size()][3];
         for (int i = 0; i < books.size(); i++) {
             data[i] = books.get(i);
@@ -21,12 +21,10 @@ public class UserController {
     }
 
     public boolean isBookAvailable(String title) {
-        return userModel.checkBookAvailability(title);
+        return catalog.checkBookAvailability(title);
     }
 
-    // ✅ Delegate AI reply generation
     public String getAIResponse(String message) {
         return ai.respond(message);
     }
 }
-

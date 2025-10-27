@@ -4,9 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class LibraryCatalog {
 
-    // ✅ Fetch list of books (for the table)
     public List<String[]> getAvailableBooks() {
         List<String[]> books = new ArrayList<>();
         String query = "SELECT id, title, author FROM books";
@@ -29,7 +28,6 @@ public class User {
         return books;
     }
 
-    // ✅ Check if a book is available
     public boolean checkBookAvailability(String title) {
         String query = "SELECT available FROM books WHERE title = ?";
 

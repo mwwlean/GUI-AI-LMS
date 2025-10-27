@@ -35,7 +35,10 @@ public class LibraryDesign extends JPanel {
         leftHeader.setBackground(new Color(245, 245, 245));
 
         JLabel logo = new JLabel();
-        logo.setIcon(new ImageIcon("src/main/java/com/mycompany/app/view/Library_logo.png"));
+        ImageIcon logoIcon = loadIcon("/images/Library_logo.png");
+        if (logoIcon != null) {
+            logo.setIcon(logoIcon);
+        }
         leftHeader.add(logo);
 
         JLabel title = new JLabel("<html><b style='color:#800000;font-size:20px;'>EVSU OCC</b><br>"
@@ -183,9 +186,14 @@ booksCard.add(tableScroll, BorderLayout.CENTER);
 // ICON (replaced emoji with image)
 aiIcon = new JLabel();
 try {
-    ImageIcon icon = new ImageIcon("src/main/java/com/mycompany/app/view/ai.png");
-    Image scaledIcon = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH); // adjust size if needed
-    aiIcon.setIcon(new ImageIcon(scaledIcon));
+    ImageIcon icon = loadIcon("/images/ai.png");
+    if (icon != null) {
+        Image scaledIcon = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+        aiIcon.setIcon(new ImageIcon(scaledIcon));
+    } else {
+        aiIcon.setText("🤖");
+        aiIcon.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 90));
+    }
 } catch (Exception e) {
     aiIcon.setText("🤖"); // fallback if image not found
     aiIcon.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 90));
@@ -308,42 +316,6 @@ aiCenterPanel.add(aiIcon, gbc);
         dayLabel.setText(dayFormat.format(now));
     }
 
-    // Rounded panel class
-    static class RoundedPanel extends JPanel {
-        private int radius;
-        public RoundedPanel(int radius) {
-            this.radius = radius;
-            setOpaque(false);
-        }
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            Graphics2D g2 = (Graphics2D) g.create();
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setColor(getBackground());
-            g2.fillRoundRect(0, 0, getWidth(), getHeight(), radius, radius);
-            g2.dispose();
-        }
-    }
-
-    // Rounded button class
-    static class RoundedButton extends JButton {
-        private int radius;
-        public RoundedButton(String text, int radius) {
-            super(text);
-            this.radius = radius;
-            setContentAreaFilled(false);
-            setFocusPainted(false); // remove focus outline
-            setBorderPainted(false); // remove default border
-        }
-        protected void paintComponent(Graphics g) {
-            Graphics2D g2 = (Graphics2D) g.create();
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setColor(getBackground());
-            g2.fillRoundRect(0, 0, getWidth(), getHeight(), radius, radius);
-            super.paintComponent(g2);
-            g2.dispose();
-        }
-    }
     private void showHelpWindow() {
     JFrame helpFrame = new JFrame("Help Instructions");
     helpFrame.setSize(600, 500);
@@ -377,4 +349,50 @@ aiCenterPanel.add(aiIcon, gbc);
     public JButton getBorrowButton() { return borrowButton; }
     public JButton getReturnButton() { return returnButton; }
     public JButton getSendButton() { return sendButton; }
+
+    private ImageIcon loadIcon(String resourcePath) {
+        java.net.URL url = getClass().getResource(resourcePath);
+        return url != null ? new ImageIcon(url) : null;
+    }
+
+    static class RoundedPanel extends JPanel {
+        private final int radius;
+
+        RoundedPanel(int radius) {
+            this.radius = radius;
+            setOpaque(false);
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(getBackground());
+            g2.fillRoundRect(0, 0, getWidth(), getHeight(), radius, radius);
+            g2.dispose();
+        }
+    }
+
+    static class RoundedButton extends JButton {
+        private final int radius;
+
+        RoundedButton(String text, int radius) {
+            super(text);
+            this.radius = radius;
+            setContentAreaFilled(false);
+            setFocusPainted(false);
+            setBorderPainted(false);
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(getBackground());
+            g2.fillRoundRect(0, 0, getWidth(), getHeight(), radius, radius);
+            super.paintComponent(g2);
+            g2.dispose();
+        }
+    }
 }

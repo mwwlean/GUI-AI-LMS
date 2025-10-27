@@ -25,16 +25,16 @@
 
 package com.mycompany.app;
 
-import com.mycompany.app.controller.UserController;
-import com.mycompany.app.model.User;
-import com.mycompany.app.view.UserView;
+import com.mycompany.app.controller.FrontDeskController;
+import com.mycompany.app.model.LibraryCatalog;
+import com.mycompany.app.view.FrontDeskView;
 
 public class App {
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(() -> {
-            User model = new User();
-            UserController controller = new UserController(model);
-            new UserView(controller).setVisible(true);
+            LibraryCatalog model = new LibraryCatalog();
+            FrontDeskController controller = new FrontDeskController(model);
+            new FrontDeskView(controller).setVisible(true);
         });
     }
 }

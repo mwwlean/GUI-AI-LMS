@@ -1,13 +1,13 @@
 package com.mycompany.app.controller;
 
-import com.mycompany.app.model.User;
+import com.mycompany.app.model.LibraryCatalog;
 
 public class AIAssistant {
 
-    private User userModel;
+    private final LibraryCatalog libraryCatalog;
 
-    public AIAssistant(User userModel) {
-        this.userModel = userModel;
+    public AIAssistant(LibraryCatalog libraryCatalog) {
+        this.libraryCatalog = libraryCatalog;
     }
 
     public String respond(String userInput) {
@@ -19,7 +19,7 @@ public class AIAssistant {
                 return "Please type the book title after the command. Example: Borrow Clean Code";
             }
 
-            boolean available = userModel.checkBookAvailability(title);
+            boolean available = libraryCatalog.checkBookAvailability(title);
             if (available) {
                 return "✅ The book \"" + title + "\" is available.\nPlease enter your Student ID and Name to continue the request.";
             } else {
@@ -27,11 +27,9 @@ public class AIAssistant {
             }
 
         } else if (userInput.matches(".*\\d+.*")) {
-            // Contains numbers, assuming student entered ID
             return "📘 Thank you! Your request will now be reviewed by the librarian.\nPlease wait for confirmation.";
         }
 
-        // Default help message
         return "🤖 Hello! You can type:\n"
                 + "- Borrow [Book Title]\n"
                 + "- Return [Book Title]\n"
