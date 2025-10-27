@@ -1,5 +1,6 @@
-package com.mycompany.app.controller;
+package com.mycompany.app.controller.frontdesk;
 
+import com.mycompany.app.controller.AIAssistant;
 import com.mycompany.app.model.LibraryCatalog;
 
 public class FrontDeskController {

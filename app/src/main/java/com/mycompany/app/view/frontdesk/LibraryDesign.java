@@ -1,4 +1,4 @@
-package com.mycompany.app.view;
+package com.mycompany.app.view.frontdesk;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

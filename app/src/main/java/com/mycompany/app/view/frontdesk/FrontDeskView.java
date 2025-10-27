@@ -1,6 +1,5 @@
-package com.mycompany.app.view;
+package com.mycompany.app.view.frontdesk;
 
-import com.mycompany.app.controller.FrontDeskController;
 import java.awt.BorderLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -13,6 +12,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
+import com.mycompany.app.controller.frontdesk.FrontDeskController;
 
 public class FrontDeskView extends JFrame {
 

@@ -1,40 +1,38 @@
-// package com.mycompany.app;
-
-// import com.mycompany.app.model.User;
-// import com.mycompany.app.view.UserView;
-// import com.mycompany.app.controller.UserController;
-
-// /**
-//  * This is the main class to start the application.
-//  */
-// public class App {
-//     public static void main(String[] args) {
-//         // Create the Model
-//         User model = new User("");
-
-//         // Create the View
-//         UserView view = new UserView();
-
-//         // Create the Controller
-//         UserController controller = new UserController(model, view);
-//     }
-// }
-
-
-
-
 package com.mycompany.app;
 
-import com.mycompany.app.controller.FrontDeskController;
+import javax.swing.SwingUtilities;
+
+import com.mycompany.app.controller.frontdesk.FrontDeskController;
+import com.mycompany.app.controller.librarian.LibrarianDashboardController;
 import com.mycompany.app.model.LibraryCatalog;
-import com.mycompany.app.view.FrontDeskView;
+import com.mycompany.app.view.frontdesk.FrontDeskView;
+import com.mycompany.app.view.librarian.LibrarianDashboardView;
 
 public class App {
+
+    private static final boolean RUN_FRONT_DESK = true;
+    private static final boolean RUN_LIBRARIAN_DASHBOARD = true;
+
     public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            LibraryCatalog model = new LibraryCatalog();
-            FrontDeskController controller = new FrontDeskController(model);
-            new FrontDeskView(controller).setVisible(true);
+        SwingUtilities.invokeLater(() -> {
+            if (RUN_FRONT_DESK) {
+                launchFrontDesk();
+            }
+            if (RUN_LIBRARIAN_DASHBOARD) {
+                launchLibrarianDashboard();
+            }
         });
+    }
+
+    private static void launchFrontDesk() {
+        LibraryCatalog catalog = new LibraryCatalog();
+        FrontDeskController controller = new FrontDeskController(catalog);
+        new FrontDeskView(controller).setVisible(true);
+    }
+
+    private static void launchLibrarianDashboard() {
+        LibrarianDashboardView view = new LibrarianDashboardView();
+        new LibrarianDashboardController(view);
+        view.setVisible(true);
     }
 }
