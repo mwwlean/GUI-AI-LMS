@@ -1,3 +1,17 @@
+C:\Users\840G3\GUI-AI-LMS\app\src\main\java\com\mycompany\app\App.java
+C:\Users\840G3\GUI-AI-LMS\app\src\main\java\com\mycompany\app\controller\LibrarianDashboardController.java
+C:\Users\840G3\GUI-AI-LMS\app\src\main\java\com\mycompany\app\controller\UserController.java
+C:\Users\840G3\GUI-AI-LMS\app\src\main\java\com\mycompany\app\model\AppConfig.java
+C:\Users\840G3\GUI-AI-LMS\app\src\main\java\com\mycompany\app\model\Book.java
+C:\Users\840G3\GUI-AI-LMS\app\src\main\java\com\mycompany\app\model\BookModel.java
+C:\Users\840G3\GUI-AI-LMS\app\src\main\java\com\mycompany\app\model\Request.java
+C:\Users\840G3\GUI-AI-LMS\app\src\main\java\com\mycompany\app\model\RequestDAO.java
+C:\Users\840G3\GUI-AI-LMS\app\src\main\java\com\mycompany\app\model\User.java
+C:\Users\840G3\GUI-AI-LMS\app\src\main\java\com\mycompany\app\util\MessageUtil.java
+C:\Users\840G3\GUI-AI-LMS\app\src\main\java\com\mycompany\app\view\BookManagementPanel.java
+C:\Users\840G3\GUI-AI-LMS\app\src\main\java\com\mycompany\app\view\LibrarianDashboardView.java
+C:\Users\840G3\GUI-AI-LMS\app\src\main\java\com\mycompany\app\view\PendingRequestsPanel.java
+C:\Users\840G3\GUI-AI-LMS\app\src\main\java\com\mycompany\app\view\UserView.java
 D:\GUI-AI-LMS-1\app\src\main\java\com\mycompany\app\App.java
 D:\GUI-AI-LMS-1\app\src\main\java\com\mycompany\app\controller\AIAssistant.java
 D:\GUI-AI-LMS-1\app\src\main\java\com\mycompany\app\controller\FrontDeskController.java
