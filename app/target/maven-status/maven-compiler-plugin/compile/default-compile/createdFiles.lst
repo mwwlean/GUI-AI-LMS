@@ -8,6 +8,7 @@ com\mycompany\app\view\librarian\LibrarianDashboardView$1.class
 com\mycompany\app\view\librarian\BookManagementPanel$2.class
 com\mycompany\app\view\frontdesk\LibraryDesign$RoundedPanel.class
 com\mycompany\app\view\frontdesk\FrontDeskView.class
+com\mycompany\app\view\frontdesk\LibraryDesign$2.class
 com\mycompany\app\view\librarian\PendingRequestsPanel$RoundedPanel.class
 com\mycompany\app\view\frontdesk\LibraryDesign.class
 com\mycompany\app\controller\AIAssistant.class
