@@ -9,7 +9,7 @@ import com.mycompany.app.view.frontdesk.FrontDeskView;
 import com.mycompany.app.view.librarian.LibrarianDashboardView;
 
 public class App {
-
+    
     private static final boolean RUN_FRONT_DESK = true;
     private static final boolean RUN_LIBRARIAN_DASHBOARD = false;
 

@@ -20,6 +20,10 @@ public class FrontDeskController {
         return ai.respond(normalized);
     }
 
+    public String getAIResponseHtml(String message) {
+        return ai.respondHtml(message);
+    }
+
     public String[][] getBooksData() {
         var books = catalog.getAvailableBooks();
         String[][] data = new String[books.size()][3];
