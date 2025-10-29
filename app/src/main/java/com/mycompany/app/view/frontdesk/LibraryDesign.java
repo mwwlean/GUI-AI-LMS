@@ -13,12 +13,17 @@ import java.util.Locale;
 import javax.swing.Timer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.SwingUtilities;
 
 public class LibraryDesign extends JPanel {
 
     private JTable booksTable;
     private JTextField chatInput;
-    private JTextArea chatDisplay;
+    private JEditorPane chatDisplay;
+    private JPanel chatStream;
+    private JScrollPane chatScroll;
     private JButton borrowButton, returnButton, sendButton;
     private JLabel timeLabel, dateLabel, dayLabel;
     private JPanel aiCenterPanel;
@@ -221,16 +226,22 @@ aiCenterPanel.add(aiIcon, gbc);
         aiCenterPanel.add(aiText, gbc);
 
         // CHAT DISPLAY
-        chatDisplay = new JTextArea();
+        chatDisplay = new JEditorPane();
+        HTMLEditorKit kit = new HTMLEditorKit();
+        chatDisplay.setEditorKit(kit);
+        chatDisplay.setDocument(kit.createDefaultDocument());
         chatDisplay.setEditable(false);
         chatDisplay.setFont(new Font("Poppins", Font.PLAIN, 13));
-        chatDisplay.setLineWrap(true);
-        chatDisplay.setWrapStyleWord(true);
         chatDisplay.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         // Scroll container (no border)
-        JScrollPane chatScroll = new JScrollPane(chatDisplay);
+        chatStream = new JPanel();
+        chatStream.setLayout(new BoxLayout(chatStream, BoxLayout.Y_AXIS));
+        chatStream.setBackground(Color.WHITE);
+
+        chatScroll = new JScrollPane(chatStream);
         chatScroll.setBorder(BorderFactory.createEmptyBorder());
+        chatScroll.getVerticalScrollBar().setUnitIncrement(18);
 
         // Overlay: AI icon + text disappear when user sends message
         JPanel layeredChat = new JPanel();
@@ -285,16 +296,7 @@ aiCenterPanel.add(aiIcon, gbc);
         sendButton.setBorder(new EmptyBorder(12, 28, 12, 28)); // bigger
         sendButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-        sendButton.addActionListener(e -> {
-            String userMessage = chatInput.getText().trim();
-            if (!userMessage.isEmpty() && !userMessage.equals("Ask Anything!")) {
-                aiCenterPanel.setVisible(false);
-                chatDisplay.append("You: " + userMessage + "\n");
-                chatInput.setText("");
-                String reply = controller.getAIResponse(userMessage);
-                chatDisplay.append("AI: " + reply + "\n\n");
-            }
-        });
+        // listener wired in FrontDeskView
 
         inputPanel.add(buttonsPanel, BorderLayout.NORTH);
         inputPanel.add(chatInput, BorderLayout.CENTER);
@@ -358,10 +360,18 @@ aiCenterPanel.add(aiIcon, gbc);
     // Getters
     public JTable getBooksTable() { return booksTable; }
     public JTextField getChatInput() { return chatInput; }
-    public JTextArea getChatDisplay() { return chatDisplay; }
+    public JEditorPane getChatDisplay() { return chatDisplay; }
     public JButton getBorrowButton() { return borrowButton; }
     public JButton getReturnButton() { return returnButton; }
     public JButton getSendButton() { return sendButton; }
+    public JPanel getChatStream() { return chatStream; }
+    public void scrollToBottom() {
+        if (chatScroll == null) return;
+        SwingUtilities.invokeLater(() ->
+            chatScroll.getVerticalScrollBar().setValue(chatScroll.getVerticalScrollBar().getMaximum())
+        );
+    }
+    public void hideAiCenterPanel() { aiCenterPanel.setVisible(false); }
 
     private ImageIcon loadIcon(String resourcePath) {
         java.net.URL url = getClass().getResource(resourcePath);
